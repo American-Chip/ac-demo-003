@@ -1,0 +1,16 @@
+*.log
+*_test.go
+.git
+.next
+/.github
+/.idea
+/bin
+/tmp
+Dockerfile*
+Makefile
+README.md
+coverage
+/ui/node_modules
+node_modules
+out
+testdata/

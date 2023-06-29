@@ -1,0 +1,48 @@
+# vim: ft=dockerfile
+# Designed to only used by Tilt to iterate faster on the API.
+FROM docker.io/golang:1.20.5-alpine@sha256:fd9d9d7194ec40a9a6ae89fcaef3e47c47de7746dd5848ab5343695dbbd09f8c AS builder
+
+# renovate: datasource=go depName=github.com/go-delve/delve
+ARG DLV_VERSION=v1.20.2
+
+# renovate: datasource=go depName=github.com/grpc-ecosystem/grpc-health-probe
+ARG GRPC_HEALTH_PROBE_VERSION=v0.4.19
+
+WORKDIR /app
+
+# hadolint ignore=DL3018
+RUN apk update && apk add --no-cache build-base
+RUN go install "github.com/go-delve/delve/cmd/dlv@${DLV_VERSION}"
+# hadolint ignore=DL3059
+RUN go install "github.com/grpc-ecosystem/grpc-health-probe@${GRPC_HEALTH_PROBE_VERSION}"
+
+COPY go.mod go.sum /app/
+RUN go mod download -modcacherw
+
+# Create a dummy ui package to convience go compiler.
+RUN mkdir -p /app/ui/packages/app/web/build && \
+    touch /app/ui/packages/app/web/build/index.html && \
+    printf 'package ui\n \
+    import "embed"\n\
+    //go:embed packages/app/web/build\n\
+    var FS embed.FS\n'\
+    > ./ui/ui.go
+
+COPY ./cmd /app/cmd
+COPY ./pkg /app/pkg
+COPY ./proto /app/proto
+COPY ./gen /app/gen
+
+# goreleaser build --single-target
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -gcflags="all=-N -l" -o parca ./cmd/parca
+
+FROM docker.io/golang:1.20.5-alpine@sha256:fd9d9d7194ec40a9a6ae89fcaef3e47c47de7746dd5848ab5343695dbbd09f8c
+
+COPY --from=builder /go/bin/dlv /
+COPY --from=builder /go/bin/grpc-health-probe /
+COPY --from=builder /app/parca /parca
+COPY parca.yaml /parca.yaml
+
+EXPOSE 7070
+
+ENTRYPOINT ["/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "--continue", "--"]

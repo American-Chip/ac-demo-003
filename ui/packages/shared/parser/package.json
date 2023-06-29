@@ -1,0 +1,25 @@
+{
+  "name": "@parca/parser",
+  "version": "0.16.55",
+  "description": "JavaScript parser implementation for the continuous profiling language",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest --coverage --config ../../../jest.config.js ./src/*",
+    "gen": "nearleyc -g -o ./src/selector.js ./src/selector.ne"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moo": "^0.5.2",
+    "nearley": "2.20.1"
+  },
+  "devDependencies": {
+    "@types/nearley": "2.11.2",
+    "jest-environment-jsdom": "^29.3.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
