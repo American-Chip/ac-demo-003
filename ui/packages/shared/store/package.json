@@ -1,0 +1,27 @@
+{
+  "name": "@parca/store",
+  "version": "0.16.84",
+  "description": "State management for Parca UI",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest --coverage --config ../../../jest.config.js ./src/*",
+    "prepublish": "yarn build",
+    "build": "tsc",
+    "watch": "tsc-watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@parca/client": "^0.16.76",
+    "@parca/hooks": "^0.0.11",
+    "@parca/utilities": "^0.0.14",
+    "@reduxjs/toolkit": "^1.7.2",
+    "react-redux": "^8.0.2",
+    "redux-persist": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

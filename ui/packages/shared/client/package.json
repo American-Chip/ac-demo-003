@@ -1,0 +1,26 @@
+{
+  "name": "@parca/client",
+  "version": "0.16.76",
+  "description": "Parca API Client",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest --coverage --config ../../../jest.config.js ./src/*",
+    "prepublish": "yarn build",
+    "build": "tsc",
+    "watch": "tsc-watch"
+  },
+  "dependencies": {
+    "@protobuf-ts/runtime": "^2.5.0",
+    "@protobuf-ts/runtime-rpc": "^2.5.0"
+  },
+  "devDependencies": {
+    "globby": "13.2.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
