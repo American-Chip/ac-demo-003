@@ -25732,9 +25732,9 @@ synchronous-promise@^2.0.15:
   integrity sha512-AsS729u2RHUfEra9xJrE39peJcc2stq2+poBXX8bcM08Y6g9j/i/PUzwNQqkaJde7Ntg1TO7bSREbR5sdosQ+g==
 
 systeminformation@^5.7:
-  version "5.18.5"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.18.5.tgz#92d3e839646a16c9329ea728a995241d8d977634"
-  integrity sha512-es2jgMdpjNv9B/sQc0afGlnS2ip7/Nzlo9hAgkaq22NZftQuqHTnf/CuBadzOwl/DZB2aCTLDtzw83nAnT2owg==
+  version "5.21.8"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.21.8.tgz#18395187e5983698619ed07ca8640ae48ec232b2"
+  integrity sha512-Xf1KDMUTQHLOT9Z7MjpSpsbaICOHcm4OZ9c9qqpkCoXuxq5MoyDrgu5GIQYpoiralXNPrqxDz3ND8MdllpXeQA==
 
 systemjs@0.20.19:
   version "0.20.19"
